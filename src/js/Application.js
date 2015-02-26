@@ -13,7 +13,7 @@ var Application = React.createClass({
                 <Layout type="Rows">
                     <Fixed className="Header">
                         <Layout type="Columns">
-                            <Fixed>MDMA</Fixed>
+                            <Fixed className="Logo">MDMA</Fixed>
                             <Flex></Flex>
                             <Fixed>
                                 <AutoSuggest />
@@ -23,7 +23,11 @@ var Application = React.createClass({
                     <Flex className="xxx">
                         <Layout type="Columns">
                             <Fixed className="Sidebar">
-                               Sidebar
+                                <Layout type="Rows">
+                                    <Fixed>Top</Fixed>
+                                    <Flex></Flex>
+                                    <Fixed>Bottom</Fixed>
+                                </Layout>
                             </Fixed>
                             <Flex className="Content">
                                 <SplitPane orientation="horizontal" minSize="200">
@@ -50,7 +54,5 @@ var Application = React.createClass({
 });
 
 
-React.render(
-    <Application />, document.body
-);
+React.render(<Application />, document.body);
 
