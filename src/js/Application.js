@@ -2,6 +2,8 @@ var React = require('react');
 var Layout = require('./components/Layout');
 var Flex = require('./components/Flex');
 var Fixed = require('./components/Fixed');
+var TabPane = require('./components/TabPane');
+var Tab = require('./components/Tab');
 var SplitPane = require('./components/SplitPane');
 var AutoSuggest = require('./components/AutoSuggest');
 
@@ -32,7 +34,11 @@ var Application = React.createClass({
                             <Flex className="Content">
                                 <SplitPane orientation="horizontal" minSize="200">
                                     <div className="side1">
-                                        hello
+                                        <TabPane orientation="vertical">
+                                            <Tab name="A" selected="true">some stuff</Tab>
+                                            <Tab name="B">whatevs</Tab>
+                                            <Tab name="C">innit</Tab>
+                                        </TabPane>
                                     </div>
                                     <SplitPane orientation="vertical" minSize="10">
                                         <div className="top1">
@@ -41,7 +47,7 @@ var Application = React.createClass({
                                             Pancetta prosciutto alcatra, pork frankfurter brisket t-bone sirloin kielbasa kevin landjaeger pig shoulder spare ribs tri-tip. Pastrami sausage turkey capicola chuck. Chuck leberkas chicken, drumstick sausage pork loin ham hock biltong bacon. Strip steak picanha fatback, bresaola spare ribs bacon ball tip cupim pork belly turkey shank corned beef beef swine. Spare ribs andouille sausage picanha short ribs leberkas pancetta ham hock ground round jerky capicola flank porchetta kevin. Sirloin prosciutto bresaola ground round chicken tri-tip chuck pastrami.
                                         </div>
                                         <div className="bottom1">
-                                            two
+                                            hello
                                         </div>
                                     </SplitPane>
                                 </SplitPane>
