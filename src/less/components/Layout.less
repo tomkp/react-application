@@ -1,0 +1,43 @@
+
+
+.Layout {
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+// vertically stacked
+.Rows {
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+}
+
+// left to right
+.Columns {
+    flex-direction: row;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.Rows > .Fixed {
+    width: 100%;
+}
+
+.Columns > .Fixed {
+    height: 100%;
+}
+
+.Rows > .Flex {
+}
+
+.Columns > .Flex {
+    height: 100%;
+}
+
+// flexible content area
+.Flex {
+    flex: 1;
+}

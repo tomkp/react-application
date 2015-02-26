@@ -1,0 +1,16 @@
+@import "../general/colors";
+
+
+.Sidebar {
+    width: 180px;
+    background-image: linear-gradient(right ,#444444 0% ,#2d2d2d 100%);
+    color: #ccc;
+}
+
+.Sidebar {
+    @narrow: ~"screen and (max-width: 1440px)";
+    @media @narrow {
+        width: 48px;
+    }
+}
+
