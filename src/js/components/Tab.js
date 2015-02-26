@@ -10,7 +10,8 @@ var Tab = React.createClass({
     },
 
     handleClick() {
-
+        console.info('Tab.handleClick');
+        this.props.parent.selected(this);
     },
 
     render() {

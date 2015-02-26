@@ -19,7 +19,7 @@ gulp.task('clean', function () {
 
 
 gulp.task('less', ['clean'], function () {
-    return gulp.src('./src/less/*.less')
+    return gulp.src(['./node_modules/normalize.css/*.css', './src/less/*.less'])
         .pipe(less())
         .pipe(prefixer('last 2 versions', 'ie 9'))
         //.pipe(rev())
