@@ -1,6 +1,26 @@
 var React = require('react');
 
-var Tab = require('./Tab');
+
+var Tab = React.createClass({
+
+    getInitialState() {
+        return {
+        }
+    },
+
+    handleClick() {
+        console.info('Tab.handleClick');
+        this.props.parent.selected(this);
+    },
+
+    render() {
+        console.info('Tab.render');
+        var classes = ['Tab'].join(' ');
+
+        return <div className={classes} ref="Tab" onClick={this.handleClick}>{this.props.name}</div>
+    }
+});
+
 
 
 
@@ -42,8 +62,10 @@ var TabPane = React.createClass({
 
         return (
             <div className={classes} ref="TabPane">
-                {this.props.children}
-                <div>
+                <div className="tabs">
+                    {this.props.children}
+                </div>
+                <div className="tab-display">
                     {this.state.selected.props.children}
                 </div>
             </div>
@@ -53,4 +75,7 @@ var TabPane = React.createClass({
 
 
 
-module.exports = TabPane;
+module.exports = {
+    TabPane: TabPane,
+    Tab: Tab
+};

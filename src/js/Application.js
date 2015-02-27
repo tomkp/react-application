@@ -2,8 +2,8 @@ var React = require('react');
 var Layout = require('./components/Layout');
 var Flex = require('./components/Flex');
 var Fixed = require('./components/Fixed');
-var TabPane = require('./components/TabPane');
-var Tab = require('./components/Tab');
+var TabPane = require('./components/TabPane').TabPane;
+var Tab = require('./components/TabPane').Tab;
 var SplitPane = require('./components/SplitPane');
 var AutoSuggest = require('./components/AutoSuggest');
 
@@ -34,7 +34,7 @@ var Application = React.createClass({
                             <Flex className="Content">
                                 <SplitPane orientation="horizontal" minSize="200">
                                     <div className="side1">
-                                        <TabPane orientation="vertical">
+                                        <TabPane orientation="horizontal">
                                             <Tab name="A" selected="true">some stuff</Tab>
                                             <Tab name="B">whatevs</Tab>
                                             <Tab name="C">innit</Tab>

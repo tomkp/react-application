@@ -2,7 +2,68 @@
 
 
 .TabPane {
-    background: #eee;
+
+    display: flex;
+    flex: 1;
+    position: relative;
+
+
+    .tabs {
+
+    }
+
+    .tab-display {
+        flex: 1;
+    }
 }
+
+.TabPane.vertical {
+
+    flex-direction: row;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    .tabs {
+        height: 100%;
+    }
+
+    .Tab {
+
+        display: block;
+
+
+        background: #eee;
+        width: 10rem;
+        text-align: center;
+    }
+
+
+}
+
+
+.TabPane.horizontal {
+
+    flex-direction: column;
+    height: 100%;
+    min-height: 100%;
+
+    .tabs {
+        width: 100%;
+    }
+
+    .Tab {
+        display: inline-block;
+
+        background: #eee;
+        width: 10rem;
+        text-align: center;
+    }
+
+}
+
+
+
 
 
