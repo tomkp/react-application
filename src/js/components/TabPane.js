@@ -8,6 +8,15 @@ var Tab = React.createClass({
         }
     },
 
+    componentDidMount() {
+        console.info('Tab.componentDidMount');
+        //if (this.props.selected) {
+        //    this.props.parent.setState({
+        //        selected: this
+        //    });
+        //}
+    },
+
     handleClick() {
         console.info('Tab.handleClick');
         this.props.parent.selected(this);
@@ -15,9 +24,12 @@ var Tab = React.createClass({
 
     render() {
         console.info('Tab.render');
-        var classes = ['Tab'].join(' ');
+        var classes = ['Tab'];
+        if (this.props.selected) {
+            classes.push('selected');
+        }
 
-        return <div className={classes} ref="Tab" onClick={this.handleClick}>{this.props.name}</div>
+        return <div className={classes.join(' ')} ref="Tab" onClick={this.handleClick}>{this.props.name}</div>
     }
 });
 
@@ -57,15 +69,16 @@ var TabPane = React.createClass({
     },
 
     render() {
-        console.info('TabPane.render');
+        console.info('TabPane.render', this.state);
         var classes = ['TabPane', this.props.orientation].join(' ');
+        var paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
 
         return (
             <div className={classes} ref="TabPane">
                 <div className="tabs">
                     {this.props.children}
                 </div>
-                <div className="tab-display">
+                <div className={paneClasses}>
                     {this.state.selected.props.children}
                 </div>
             </div>
