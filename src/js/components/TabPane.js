@@ -1,5 +1,4 @@
-var React = require('react');
-
+var React = require('react/addons');
 
 var Tab = React.createClass({
 
@@ -73,6 +72,7 @@ var TabPane = React.createClass({
     componentWillUnmount() {
     },
 
+
     selected(tab) {
         console.info('TabPane.selected', tab);
         this.setState({
@@ -88,6 +88,7 @@ var TabPane = React.createClass({
         });
     },
 
+
     render() {
         console.info('TabPane.render', this.state);
         var classes = ['TabPane', this.props.orientation].join(' ');
@@ -99,13 +100,41 @@ var TabPane = React.createClass({
             return child;
         });
 
+
+        var selectedTab = this.state.selectedTab;
+        var newSelectedTab;
+        var selectedTabName = "None";
+        var tabs = [];
+        var tabItems = [];
+        var selectedKey = (this.state.selectedTab && this.state.selectedTab.props.key);
+        var isSelected;
+
+        console.info('selectedKey', selectedKey, this.state.selectedTab, this.state.selectedTab.props.key);
+
+        tabs = React.Children.map(this.props.children, function(tab, i) {
+
+            isSelected = tab.props.key === selectedKey;
+            if (isSelected) {
+                newSelectedTab = tab;
+            }
+            return React.addons.cloneWithProps(tab, {
+                isSelected: isSelected,
+                selectTab: this.selectTab,
+                key: tab.props.key
+            });
+        }, this);
+
+        tabItems = (newSelectedTab && newSelectedTab.props.children) || [];
+
+
+
         return (
             <div className={classes} ref="TabPane">
                 <div className="tabs">
-                    {elements}
+                    {tabs}
                 </div>
                 <div className={paneClasses}>
-                    {this.state.selectedTab.props.children}
+                    {tabItems}
                 </div>
             </div>
         )
