@@ -34,10 +34,10 @@ var Application = React.createClass({
                             <Flex className="Content">
                                 <SplitPane orientation="horizontal" minSize="200">
                                     <div className="side1">
-                                        <TabPane orientation="horizontal" className="my-tabs">
-                                            <Tab name="A" selected="true">some stuff</Tab>
-                                            <Tab name="B">whatevs</Tab>
-                                            <Tab name="C">innit</Tab>
+                                        <TabPane orientation="vertical" className="my-tabs">
+                                            <Tab key="A" name="A">some stuff</Tab>
+                                            <Tab key="B" name="B">whatevs</Tab>
+                                            <Tab key="C" name="C">innit</Tab>
                                         </TabPane>
                                     </div>
                                     <SplitPane orientation="vertical" minSize="10">

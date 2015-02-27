@@ -4,28 +4,39 @@ var React = require('react');
 var Tab = React.createClass({
 
     getInitialState() {
+        console.info('Tab.getInitialState');
         return {
+            selected: false
         }
     },
 
     componentDidMount() {
         console.info('Tab.componentDidMount');
-        //if (this.props.selected) {
-        //    this.props.parent.setState({
-        //        selected: this
-        //    });
-        //}
+        if (this.props.selected) {
+            this.setState({
+                selected: true
+            });
+        }
     },
 
     handleClick() {
         console.info('Tab.handleClick');
         this.props.parent.selected(this);
+        this.setState({
+            selected: true
+        })
+    },
+
+    deselect() {
+        this.setState({
+            selected: false
+        });
     },
 
     render() {
-        console.info('Tab.render');
+        console.info('Tab.render', this.state);
         var classes = ['Tab'];
-        if (this.props.selected) {
+        if (this.state.selected) {
             classes.push('selected');
         }
 
@@ -36,11 +47,12 @@ var Tab = React.createClass({
 
 
 
+
 var TabPane = React.createClass({
 
     getInitialState() {
         console.info('TabPane.getInitialState');
-        var selected;
+        var selected = this.props.children[0];
         this.props.children.forEach((child) => {
             console.info('child', child);
             child.props.parent = this;
@@ -49,7 +61,7 @@ var TabPane = React.createClass({
             }
         });
         return {
-            selected: selected
+            selectedTab: selected
         }
     },
 
@@ -64,7 +76,15 @@ var TabPane = React.createClass({
     selected(tab) {
         console.info('TabPane.selected', tab);
         this.setState({
-            selected: tab
+            selectedTab: tab
+        });
+
+        this.props.children.forEach((child, index) => {
+            console.info('child', child, '-', tab, '-', index);
+            if (child !== tab) {
+                //child.setState({selected: false});
+                //child.deselect(); //setState({selected: false});
+            }
         });
     },
 
@@ -73,13 +93,19 @@ var TabPane = React.createClass({
         var classes = ['TabPane', this.props.orientation].join(' ');
         var paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
 
+        var elements = this.props.children.map((child) => {
+            console.info('child', child);
+            //return <Tab name={child.props.name}>child.props.children</Tab>;
+            return child;
+        });
+
         return (
             <div className={classes} ref="TabPane">
                 <div className="tabs">
-                    {this.props.children}
+                    {elements}
                 </div>
                 <div className={paneClasses}>
-                    {this.state.selected.props.children}
+                    {this.state.selectedTab.props.children}
                 </div>
             </div>
         )
