@@ -8,35 +8,32 @@ var suggestions = [
 
 
 
-var Actions = {
-    enter() {
+var SearchBox = React.createClass({
+
+
+    handleEnter() {
         console.info('Actions.enter');
     },
-    escape() {
+    handleEscape() {
         console.info('Actions.escape');
     },
-    arrowUp() {
+    handleArrowUp() {
         console.info('Actions.arrowUp');
     },
-    arrowRight() {
+    handleArrowRight() {
         console.info('Actions.arrowRight');
     },
-    arrowDown() {
+    handleArrowDown() {
         console.info('Actions.arrowDown');
-    }
-};
+    },
 
-var keys = {
-    13: Actions.enter,
-    27: Actions.escape,
-    38: Actions.arrowUp,
-    39: Actions.arrowRight,
-    40: Actions.arrowDown
-};
-
-
-
-var SearchBox = React.createClass({
+    keys: {
+        13: this.handleEnter,
+        27: this.handleEscape,
+        38: this.handleArrowUp,
+        39: this.handleArrowRight,
+        40: this.handleArrowDown
+    },
 
     getInitialState() {
         return {
@@ -50,7 +47,8 @@ var SearchBox = React.createClass({
 
     keyDown(e) {
         console.info('SearchBox.keyDown');
-        var fn = keys[e.keyCode];
+
+        var fn = this.keys[e.keyCode];
         if (fn) {
             fn(e);
         }
@@ -58,7 +56,7 @@ var SearchBox = React.createClass({
 
     keyUp(e) {
         console.info('SearchBox.keyUp', e);
-        if (!keys[e.keyCode]) {
+        if (!this.keys[e.keyCode]) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
