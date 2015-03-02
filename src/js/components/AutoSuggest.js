@@ -2,6 +2,12 @@ var React = require("react");
 
 
 
+var suggestions = [
+    'chicken', 'duck', 'elephant', 'zebra', 'penguin', 'dog', 'cat', 'crocodile'
+];
+
+
+
 var Actions = {
     enter() {
         console.info('Actions.enter');
@@ -29,12 +35,6 @@ var keys = {
 };
 
 
-var suggestions = [
-    'chicken', 'duck', 'elephant', 'zebra', 'penguin', 'dog', 'cat', 'crocodile'
-];
-
-
-
 
 var SearchBox = React.createClass({
 
@@ -45,7 +45,7 @@ var SearchBox = React.createClass({
     },
 
     componentDidMount() {
-        this.refs.searchBox.getDOMNode().focus();
+        //this.refs.searchBox.getDOMNode().focus();
     },
 
     keyDown(e) {
@@ -59,9 +59,6 @@ var SearchBox = React.createClass({
     keyUp(e) {
         console.info('SearchBox.keyUp', e);
         if (!keys[e.keyCode]) {
-            // store inputted value
-            //inputtedTerm = inputField.attr("value");
-            //triggerDropDown();
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
@@ -81,33 +78,40 @@ var DropDown = React.createClass({
 
     getInitialState() {
         return {
-             displayed: false
         }
     },
 
 
     render() {
-        console.info('DropDown.render', this.props.suggestions);
+        console.info('DropDown.render', this.props.suggestions, this.state);
         var entries = this.props.suggestions
             .map((suggestion) => {
-                return <div>{suggestion}</div>;
+                return <div><a href="#">{suggestion}</a></div>;
             });
-        return <div className="DropDown">{entries}</div>;
+
+        var styles = {
+            display: this.props.display?'block':'none'
+        };
+
+        return <div className="DropDown" style={styles}>{entries}</div>;
     }
 });
+
 
 var AutoSuggest = React.createClass({
 
     getInitialState() {
         return {
-            suggestions: []
+            suggestions: [],
+            displayDropDown: false
         }
     },
 
     handleTerm(term) {
         console.info('AutoSuggest.handleTerm', term);
         this.setState({
-            suggestions: suggestions
+            suggestions: suggestions,
+            displayDropDown: true
         });
     },
 
@@ -115,7 +119,7 @@ var AutoSuggest = React.createClass({
         console.info('AutoSuggest.render');
         return  (<div className="AutoSuggest">
                     <SearchBox inputted={this.handleTerm} />
-                    <DropDown suggestions={this.state.suggestions} />
+                    <DropDown key="dropdown" suggestions={this.state.suggestions} display={this.state.displayDropDown} />
                 </div>)
     }
 });
