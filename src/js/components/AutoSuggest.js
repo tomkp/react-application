@@ -8,8 +8,23 @@ var suggestions = [
 
 var SearchBox = React.createClass({
 
+
+    getInitialState() {
+        return {
+            initialised: false
+        }
+    },
+
+    componentDidMount() {
+        console.info('SearchBox.componentDidMount');
+        this.refs.searchBox.getDOMNode().focus();
+    },
+
     keyDown(e) {
         console.info('SearchBox.keyDown');
+        this.setState({
+            initialised: true
+        });
         var keys = [13,27,38,39,40];
         if (keys.indexOf(e.keyCode) !== -1) {
             this.props.special(e.keyCode);
@@ -19,7 +34,7 @@ var SearchBox = React.createClass({
     keyUp(e) {
         console.info('SearchBox.keyUp', e, e.keyCode);
         var keys = [13,27,38,39,40];
-        if (keys.indexOf(e.keyCode) === -1) {
+        if (this.state.initialised && keys.indexOf(e.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
