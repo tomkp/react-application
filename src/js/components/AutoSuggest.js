@@ -5,53 +5,21 @@ var suggestions = [
     'chicken', 'duck', 'elephant', 'zebra', 'penguin', 'dog', 'cat', 'crocodile'
 ];
 
-var handleEnter = function () {
-    console.info('Actions.enter');
-};
-var handleEscape = function () {
-    console.info('Actions.escape');
-};
-var handleArrowUp = function () {
-    console.info('Actions.arrowUp');
-};
-var handleArrowRight = function () {
-    console.info('Actions.arrowRight');
-};
-var handleArrowDown = function () {
-    console.info('Actions.arrowDown');
-};
-
-var keys = {
-    13: handleEnter,
-    27: handleEscape,
-    38: handleArrowUp,
-    39: handleArrowRight,
-    40: handleArrowDown
-};
 
 var SearchBox = React.createClass({
 
-
-    getInitialState() {
-        return {}
-    },
-
-    componentDidMount() {
-        //this.refs.searchBox.getDOMNode().focus();
-    },
-
     keyDown(e) {
         console.info('SearchBox.keyDown');
-
-        var fn = keys[e.keyCode];
-        if (fn) {
-            fn(e);
+        var keys = [13,27,38,39,40];
+        if (keys.indexOf(e.keyCode) !== -1) {
+            this.props.special(e.keyCode);
         }
     },
 
     keyUp(e) {
-        console.info('SearchBox.keyUp', e);
-        if (!keys[e.keyCode]) {
+        console.info('SearchBox.keyUp', e, e.keyCode);
+        var keys = [13,27,38,39,40];
+        if (keys.indexOf(e.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
@@ -62,25 +30,28 @@ var SearchBox = React.createClass({
 
     render() {
         console.info('SearchBox.render');
-        return <input className="SearchBox" ref="searchBox" onKeyDown={this.keyDown} onKeyUp={this.keyUp} />
+        return <input ref="searchBox"
+            className="SearchBox"
+            onKeyDown={this.keyDown}
+            onKeyUp={this.keyUp}
+            value={this.props.displayTerm} />
     }
 });
 
 
 var DropDown = React.createClass({
 
-    getInitialState() {
-        return {}
-    },
-
 
     render() {
-        console.info('DropDown.render', this.props.suggestions, this.state);
+        console.info('DropDown.render', this.props.suggestions);
+        var index = this.props.index;
         var entries = this.props.suggestions
-            .map((suggestion) => {
-                return <div>
-                    <a href="#">{suggestion}</a>
-                </div>;
+            .map((suggestion, i) => {
+                return (
+                    <div className={i === index?'selected':''}>
+                        <a href="#">{suggestion}</a>
+                    </div>
+                );
             });
 
         var styles = {
@@ -97,24 +68,76 @@ var AutoSuggest = React.createClass({
     getInitialState() {
         return {
             suggestions: [],
-            displayDropDown: false
+            displayDropDown: false,
+            index: -1
         }
     },
 
     handleTerm(term) {
         console.info('AutoSuggest.handleTerm', term);
         this.setState({
+            term: term,
             suggestions: suggestions,
             displayDropDown: true
         });
     },
 
+
+    handleSpecial(code) {
+        console.info('AutoSuggest.handleSpecial');
+        var length = this.state.suggestions.length;
+        var index = this.state.index;
+        var displayDropDown = true;
+        var displayTerm;
+
+        if (code === 13) {
+            // enter
+
+        } else if (code === 27) {
+            // esc
+            index = -1;
+            displayDropDown = false;
+        } else if (code === 38) {
+            // up
+            if (index === -1) {
+                index = length - 1;
+            } else {
+                index--;
+            }
+        } else if (code === 39) {
+            // right
+        } else if (code === 40) {
+            // down
+            if (index === length - 1) {
+                index = -1;
+            } else {
+                index++;
+            }
+        }
+
+        displayTerm = index === -1?this.state.term:this.state.suggestions[index];
+        this.setState({
+            index: index,
+            displayTerm: displayTerm,
+            displayDropDown: displayDropDown
+        })
+    },
+
+
     render() {
         console.info('AutoSuggest.render');
         return (
             <div className="AutoSuggest">
-                <SearchBox inputted={this.handleTerm} />
-                <DropDown key="dropdown" suggestions={this.state.suggestions} display={this.state.displayDropDown} />
+                <SearchBox
+                    inputted={this.handleTerm}
+                    special={this.handleSpecial}
+                    displayTerm={this.state.displayTerm}
+                />
+                <DropDown key="dropdown"
+                    suggestions={this.state.suggestions}
+                    display={this.state.displayDropDown}
+                    index={this.state.index}
+                />
             </div>
         );
     }
