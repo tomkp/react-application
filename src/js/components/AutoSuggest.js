@@ -11,35 +11,33 @@ var SearchBox = React.createClass({
 
     getInitialState() {
         return {
-            initialised: false
         }
     },
 
     componentDidMount() {
         console.info('SearchBox.componentDidMount');
-        this.refs.searchBox.getDOMNode().focus();
+        //this.refs.searchBox.getDOMNode().focus();
     },
 
     keyDown(e) {
         console.info('SearchBox.keyDown');
-        this.setState({
-            initialised: true
-        });
         var keys = [13,27,38,39,40];
         if (keys.indexOf(e.keyCode) !== -1) {
-            this.props.special(e.keyCode);
+            //this.props.special(e.keyCode);
         }
     },
 
     keyUp(e) {
         console.info('SearchBox.keyUp', e, e.keyCode);
         var keys = [13,27,38,39,40];
-        if (this.state.initialised && keys.indexOf(e.keyCode) === -1) {
+        if (keys.indexOf(e.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
             });
-            this.props.inputted(inputtedTerm);
+            this.props.handleTerm(inputtedTerm);
+        } else {
+            this.props.handleSpecial(e.keyCode);
         }
     },
 
@@ -131,6 +129,7 @@ var AutoSuggest = React.createClass({
         }
 
         displayTerm = index === -1?this.state.term:this.state.suggestions[index];
+        console.info('displayTerm', displayTerm, index);
         this.setState({
             index: index,
             displayTerm: displayTerm,
@@ -144,8 +143,8 @@ var AutoSuggest = React.createClass({
         return (
             <div className="AutoSuggest">
                 <SearchBox
-                    inputted={this.handleTerm}
-                    special={this.handleSpecial}
+                    handleTerm={this.handleTerm}
+                    handleSpecial={this.handleSpecial}
                     displayTerm={this.state.displayTerm}
                 />
                 <DropDown key="dropdown"
