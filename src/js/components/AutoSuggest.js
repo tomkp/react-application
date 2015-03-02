@@ -1,44 +1,39 @@
 var React = require("react");
 
 
-
 var suggestions = [
     'chicken', 'duck', 'elephant', 'zebra', 'penguin', 'dog', 'cat', 'crocodile'
 ];
 
+var handleEnter = function () {
+    console.info('Actions.enter');
+};
+var handleEscape = function () {
+    console.info('Actions.escape');
+};
+var handleArrowUp = function () {
+    console.info('Actions.arrowUp');
+};
+var handleArrowRight = function () {
+    console.info('Actions.arrowRight');
+};
+var handleArrowDown = function () {
+    console.info('Actions.arrowDown');
+};
 
+var keys = {
+    13: handleEnter,
+    27: handleEscape,
+    38: handleArrowUp,
+    39: handleArrowRight,
+    40: handleArrowDown
+};
 
 var SearchBox = React.createClass({
 
 
-    handleEnter() {
-        console.info('Actions.enter');
-    },
-    handleEscape() {
-        console.info('Actions.escape');
-    },
-    handleArrowUp() {
-        console.info('Actions.arrowUp');
-    },
-    handleArrowRight() {
-        console.info('Actions.arrowRight');
-    },
-    handleArrowDown() {
-        console.info('Actions.arrowDown');
-    },
-
-    keys: {
-        13: this.handleEnter,
-        27: this.handleEscape,
-        38: this.handleArrowUp,
-        39: this.handleArrowRight,
-        40: this.handleArrowDown
-    },
-
     getInitialState() {
-        return {
-
-        }
+        return {}
     },
 
     componentDidMount() {
@@ -48,7 +43,7 @@ var SearchBox = React.createClass({
     keyDown(e) {
         console.info('SearchBox.keyDown');
 
-        var fn = this.keys[e.keyCode];
+        var fn = keys[e.keyCode];
         if (fn) {
             fn(e);
         }
@@ -56,7 +51,7 @@ var SearchBox = React.createClass({
 
     keyUp(e) {
         console.info('SearchBox.keyUp', e);
-        if (!this.keys[e.keyCode]) {
+        if (!keys[e.keyCode]) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.setState({
                 inputtedTerm: inputtedTerm
@@ -75,8 +70,7 @@ var SearchBox = React.createClass({
 var DropDown = React.createClass({
 
     getInitialState() {
-        return {
-        }
+        return {}
     },
 
 
@@ -84,11 +78,13 @@ var DropDown = React.createClass({
         console.info('DropDown.render', this.props.suggestions, this.state);
         var entries = this.props.suggestions
             .map((suggestion) => {
-                return <div><a href="#">{suggestion}</a></div>;
+                return <div>
+                    <a href="#">{suggestion}</a>
+                </div>;
             });
 
         var styles = {
-            display: this.props.display?'block':'none'
+            display: this.props.display ? 'block' : 'none'
         };
 
         return <div className="DropDown" style={styles}>{entries}</div>;
@@ -115,10 +111,12 @@ var AutoSuggest = React.createClass({
 
     render() {
         console.info('AutoSuggest.render');
-        return  (<div className="AutoSuggest">
-                    <SearchBox inputted={this.handleTerm} />
-                    <DropDown key="dropdown" suggestions={this.state.suggestions} display={this.state.displayDropDown} />
-                </div>)
+        return (
+            <div className="AutoSuggest">
+                <SearchBox inputted={this.handleTerm} />
+                <DropDown key="dropdown" suggestions={this.state.suggestions} display={this.state.displayDropDown} />
+            </div>
+        );
     }
 });
 
