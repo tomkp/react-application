@@ -11,6 +11,7 @@ var SearchBox = React.createClass({
 
     getInitialState() {
         return {
+            value: ''
         }
     },
 
@@ -19,34 +20,58 @@ var SearchBox = React.createClass({
         //this.refs.searchBox.getDOMNode().focus();
     },
 
-    keyDown(e) {
+    keyDown(event) {
         console.info('SearchBox.keyDown');
         var keys = [13,27,38,39,40];
-        if (keys.indexOf(e.keyCode) !== -1) {
-            //this.props.special(e.keyCode);
+        if (keys.indexOf(event.keyCode) !== -1) {
+            this.props.handleSpecial(event.keyCode);
         }
     },
 
-    keyUp(e) {
-        console.info('SearchBox.keyUp', e, e.keyCode);
+    keyUp(event) {
+        console.info('SearchBox.keyUp', event, event.keyCode);
+        //var keys = [13,27,38,39,40];
+        //if (keys.indexOf(event.keyCode) === -1) {
+        //    var inputtedTerm = this.refs.searchBox.getDOMNode().value;
+        //    //this.setState({
+        //    //    inputtedTerm: inputtedTerm
+        //    //});
+        //    this.props.handleTerm(inputtedTerm);
+        //} else {
+        //    this.props.handleSpecial(event.keyCode);
+        //}
+    },
+
+    handleChange(event) {
+        console.info('SearchBox.handleChange', event, event.keyCode);
+
+        this.setState({value: event.target.value});
         var keys = [13,27,38,39,40];
-        if (keys.indexOf(e.keyCode) === -1) {
+        if (keys.indexOf(event.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
-            this.setState({
-                inputtedTerm: inputtedTerm
-            });
+            //this.setState({
+            //    inputtedTerm: inputtedTerm
+            //});
             this.props.handleTerm(inputtedTerm);
         } else {
-            this.props.handleSpecial(e.keyCode);
+            //this.props.handleSpecial(event.keyCode);
         }
     },
 
+    onInput(event) {
+        console.info('SearchBox.onInput', event, event.keyCode);
+
+    },
+
+
     render() {
-        console.info('SearchBox.render');
+        console.info('SearchBox.render', this.props.displayTerm);
         return <input ref="searchBox"
             className="SearchBox"
             onKeyDown={this.keyDown}
             onKeyUp={this.keyUp}
+            onChange={this.handleChange}
+            onInput={this.onInput}
             value={this.props.displayTerm} />
     }
 });
@@ -101,7 +126,7 @@ var AutoSuggest = React.createClass({
         var length = this.state.suggestions.length;
         var index = this.state.index;
         var displayDropDown = true;
-        var displayTerm;
+        var term;
 
         if (code === 13) {
             // enter
@@ -128,11 +153,11 @@ var AutoSuggest = React.createClass({
             }
         }
 
-        displayTerm = index === -1?this.state.term:this.state.suggestions[index];
-        console.info('displayTerm', displayTerm, index);
+        term = index === -1?this.state.term:this.state.suggestions[index];
+        console.info('term', term, index);
         this.setState({
             index: index,
-            displayTerm: displayTerm,
+            term: term,
             displayDropDown: displayDropDown
         })
     },
@@ -145,7 +170,7 @@ var AutoSuggest = React.createClass({
                 <SearchBox
                     handleTerm={this.handleTerm}
                     handleSpecial={this.handleSpecial}
-                    displayTerm={this.state.displayTerm}
+                    displayTerm={this.state.term}
                 />
                 <DropDown key="dropdown"
                     suggestions={this.state.suggestions}
