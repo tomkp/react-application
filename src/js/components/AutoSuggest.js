@@ -27,7 +27,9 @@ var SearchBox = React.createClass({
 
     handleChange(event) {
         console.info('SearchBox.handleChange', event, event.keyCode);
-        this.setState({value: event.target.value});
+        this.setState({
+            value: event.target.value
+        });
         var keys = [13,27,38,39,40];
         if (keys.indexOf(event.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
@@ -52,7 +54,9 @@ var SearchBox = React.createClass({
 var DropDown = React.createClass({
 
     handleClick(event) {
-        console.info('DropDown.handleClick', event);
+        console.info('DropDown.handleClick');
+        var suggestion = event.target.getAttribute('data-suggestion');
+        this.props.handleTerm(suggestion);
     },
 
     render() {
@@ -60,8 +64,15 @@ var DropDown = React.createClass({
         var index = this.props.index;
         var entries = this.props.suggestions
             .map((suggestion, i) => {
+                var classes = ['suggestion'];
+                if (i === index) {
+                    classes.push('selected');
+                }
                 return (
-                    <div className={i === index?'selected':''} onClick={this.handleClick} key={suggestion}>
+                    <div className={classes.join(' ')}
+                        onClick={this.handleClick}
+                        data-suggestion={suggestion}
+                        key={suggestion}>
                         {suggestion}
                     </div>
                 );
@@ -149,6 +160,7 @@ var AutoSuggest = React.createClass({
                     displayTerm={this.state.term}
                 />
                 <DropDown key="dropdown"
+                    handleTerm={this.handleTerm}
                     suggestions={this.state.suggestions}
                     display={this.state.displayDropDown}
                     index={this.state.index}
