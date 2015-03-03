@@ -34,9 +34,9 @@ let Application = React.createClass({
                                 <SplitPane orientation="horizontal" minSize="200">
                                     <div className="side1">
                                         <TabPane orientation="vertical" className="my-tabs">
-                                            <Tab key="A" id="A" name="A">some stuff</Tab>
-                                            <Tab key="B" id="B" name="B" active="true">whatevs</Tab>
-                                            <Tab key="C" id="C" name="C">innit</Tab>
+                                            <Tab id="A" name="A">some stuff</Tab>
+                                            <Tab id="B" name="B" active="true">whatevs</Tab>
+                                            <Tab id="C" name="C">innit</Tab>
                                         </TabPane>
                                     </div>
                                     <SplitPane orientation="vertical" minSize="10">
