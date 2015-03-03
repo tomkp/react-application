@@ -15,10 +15,6 @@ var SearchBox = React.createClass({
         }
     },
 
-    componentDidMount() {
-        console.info('SearchBox.componentDidMount');
-        //this.refs.searchBox.getDOMNode().focus();
-    },
 
     keyDown(event) {
         console.info('SearchBox.keyDown');
@@ -28,39 +24,17 @@ var SearchBox = React.createClass({
         }
     },
 
-    keyUp(event) {
-        console.info('SearchBox.keyUp', event, event.keyCode);
-        //var keys = [13,27,38,39,40];
-        //if (keys.indexOf(event.keyCode) === -1) {
-        //    var inputtedTerm = this.refs.searchBox.getDOMNode().value;
-        //    //this.setState({
-        //    //    inputtedTerm: inputtedTerm
-        //    //});
-        //    this.props.handleTerm(inputtedTerm);
-        //} else {
-        //    this.props.handleSpecial(event.keyCode);
-        //}
-    },
 
     handleChange(event) {
         console.info('SearchBox.handleChange', event, event.keyCode);
-
         this.setState({value: event.target.value});
         var keys = [13,27,38,39,40];
         if (keys.indexOf(event.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
-            //this.setState({
-            //    inputtedTerm: inputtedTerm
-            //});
             this.props.handleTerm(inputtedTerm);
         } else {
-            //this.props.handleSpecial(event.keyCode);
+            this.props.handleSpecial(event.keyCode);
         }
-    },
-
-    onInput(event) {
-        console.info('SearchBox.onInput', event, event.keyCode);
-
     },
 
 
@@ -69,9 +43,7 @@ var SearchBox = React.createClass({
         return <input ref="searchBox"
             className="SearchBox"
             onKeyDown={this.keyDown}
-            onKeyUp={this.keyUp}
             onChange={this.handleChange}
-            onInput={this.onInput}
             value={this.props.displayTerm} />
     }
 });
@@ -114,6 +86,7 @@ var AutoSuggest = React.createClass({
     handleTerm(term) {
         console.info('AutoSuggest.handleTerm', term);
         this.setState({
+            index: -1,
             term: term,
             suggestions: suggestions,
             displayDropDown: true
