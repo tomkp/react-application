@@ -1,11 +1,11 @@
-var React = require('react');
+import React from 'react';
 
 
-var Flex = React.createClass({
+let Flex = React.createClass({
 
     render() {
         console.info('Flex.render');
-        var classes = ['Flex', this.props.className].join(' ');
+        let classes = ['Flex', this.props.className].join(' ');
         return <div className={classes}>{this.props.children}</div>;
     }
 });

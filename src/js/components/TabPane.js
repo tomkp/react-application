@@ -1,6 +1,8 @@
-var React = require('react/addons');
+import React from 'react/addons';
 
-var Tab = React.createClass({
+
+
+let Tab = React.createClass({
 
 
     handleClick() {
@@ -10,11 +12,16 @@ var Tab = React.createClass({
 
     render() {
         console.info('Tab.render');
-        var classes = ['Tab'];
+        let classes = ['Tab'];
         if (this.props.active) {
             classes.push('active');
         }
-        return <div className={classes.join(' ')} onClick={this.handleClick}>{this.props.name}</div>
+        return (
+            <div className={classes.join(' ')}
+                onClick={this.handleClick}>
+                {this.props.name}
+            </div>
+        )
     }
 });
 
@@ -22,11 +29,11 @@ var Tab = React.createClass({
 
 
 
-var TabPane = React.createClass({
+let TabPane = React.createClass({
 
     getInitialState() {
         console.info('TabPane.getInitialState');
-        var selected = this.props.children[0];
+        let selected = this.props.children[0];
         this.props.children.forEach((child) => {
             child.props.parent = this;
             if (child.props.selected) {
@@ -40,7 +47,7 @@ var TabPane = React.createClass({
 
 
     selectTab(tab) {
-        console.info('TabPane.selected', tab);
+        console.info('TabPane.selectTab', tab.props.name);
         this.setState({
             selectedTab: tab
         });
@@ -49,15 +56,16 @@ var TabPane = React.createClass({
 
     render() {
         console.info('TabPane.render');
-        var classes = ['TabPane', this.props.orientation].join(' ');
-        var paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
-        var selectedid = this.state.selectedTab.props.id;
-        var elements = this.props.children.map((child) => {
-            var active = child.props.id === selectedid;
+        let classes = ['TabPane', this.props.orientation].join(' ');
+        let paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
+        let selectedid = this.state.selectedTab.props.id;
+        let elements = this.props.children.map((child) => {
+            let active = child.props.id === selectedid;
             return React.addons.cloneWithProps(child, {
                 active: active,
                 selectTab: this.selectTab,
-                id: child.props.id
+                id: child.props.id,
+                key: child.props.id
             });
         });
 

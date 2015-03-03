@@ -1,11 +1,11 @@
-var React = require('react');
+import React from 'react';
 
 
-var Layout = React.createClass({
+let Layout = React.createClass({
 
     render() {
         console.info('Layout.render');
-        var classes = ['Layout', this.props.type].join(' ');
+        let classes = ['Layout', this.props.type].join(' ');
         return <div className={classes}>{this.props.children}</div>;
     }
 });

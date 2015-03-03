@@ -1,7 +1,7 @@
-var React = require('react');
+import React from 'react';
 
 
-var Resizer = React.createClass({
+let Resizer = React.createClass({
 
     handleDown() {
         this.props.down();
@@ -13,7 +13,7 @@ var Resizer = React.createClass({
 });
 
 
-var Pane = React.createClass({
+let Pane = React.createClass({
 
     getInitialState() {
         return {
@@ -21,8 +21,8 @@ var Pane = React.createClass({
     },
 
     render() {
-        var classes = ['Pane'];
-        var styles = {};
+        let classes = ['Pane'];
+        let styles = {};
         if (this.state.size) {
             if (this.props.orientation === 'horizontal') {
                 styles = {
@@ -41,7 +41,7 @@ var Pane = React.createClass({
 });
 
 
-var SplitPane = React.createClass({
+let SplitPane = React.createClass({
 
     getInitialState() {
         return {
@@ -61,7 +61,7 @@ var SplitPane = React.createClass({
 
 
     down() {
-        var position = this.props.orientation === 'horizontal' ? event.clientX : event.clientY;
+        let position = this.props.orientation === 'horizontal' ? event.clientX : event.clientY;
         this.setState({
             active: true,
             position: position
@@ -70,17 +70,17 @@ var SplitPane = React.createClass({
 
     move() {
         if (this.state.active) {
-            var ref = this.refs.pane1;
+            let ref = this.refs.pane1;
             if (ref) {
-                var node = ref.getDOMNode();
+                let node = ref.getDOMNode();
                 if (window.getComputedStyle) {
-                    var styles = window.getComputedStyle(node);
-                    var width = styles.width.replace('px', '');
-                    var height = styles.height.replace('px', '');
-                    var current = this.props.orientation === 'horizontal' ? event.clientX : event.clientY;
-                    var size = this.props.orientation === 'horizontal' ? width : height;
-                    var position = this.state.position;
-                    var newSize = size - (position - current);
+                    let styles = window.getComputedStyle(node);
+                    let width = styles.width.replace('px', '');
+                    let height = styles.height.replace('px', '');
+                    let current = this.props.orientation === 'horizontal' ? event.clientX : event.clientY;
+                    let size = this.props.orientation === 'horizontal' ? width : height;
+                    let position = this.state.position;
+                    let newSize = size - (position - current);
                     this.setState({
                         position: current
                     });
@@ -101,15 +101,15 @@ var SplitPane = React.createClass({
     },
 
     render() {
-        var elements = [];
-        var children = this.props.children;
-        var child0 = children[0];
-        var child1 = children[1];
+        let elements = [];
+        let children = this.props.children;
+        let child0 = children[0];
+        let child1 = children[1];
         elements.push(<Pane ref="pane1" key="pane1" orientation={this.props.orientation}>{child0}</Pane>);
         elements.push(<Resizer ref="resizer" key="resizer" down={this.down} />);
         elements.push(<Pane ref="pane2" key="pane2">{child1}</Pane>);
 
-        var classes = ['SplitPane', this.props.orientation].join(' ');
+        let classes = ['SplitPane', this.props.orientation].join(' ');
 
         return <div className={classes} ref="splitPane">{elements}</div>
     }
