@@ -1,14 +1,13 @@
-var React = require('react');
-var Layout = require('./components/Layout');
-var Flex = require('./components/Flex');
-var Fixed = require('./components/Fixed');
-var TabPane = require('./components/TabPane').TabPane;
-var Tab = require('./components/TabPane').Tab;
-var SplitPane = require('./components/SplitPane');
-var AutoSuggest = require('./components/AutoSuggest');
+import React from 'react';
+import Layout from './components/Layout'; 
+import Flex from './components/Flex'; 
+import Fixed from './components/Fixed'; 
+import {TabPane, Tab} from './components/TabPane';
+import SplitPane from './components/SplitPane'; 
+import AutoSuggest from './components/AutoSuggest'; 
 
 
-var Application = React.createClass({
+let Application = React.createClass({
 
     render: function () {
         return (
