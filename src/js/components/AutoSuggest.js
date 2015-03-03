@@ -15,6 +15,10 @@ var SearchBox = React.createClass({
         }
     },
 
+    componentDidMount() {
+        this.refs.searchBox.getDOMNode().focus();
+    },
+
 
     keyDown(event) {
         console.info('SearchBox.keyDown');
@@ -34,8 +38,6 @@ var SearchBox = React.createClass({
         if (keys.indexOf(event.keyCode) === -1) {
             var inputtedTerm = this.refs.searchBox.getDOMNode().value;
             this.props.handleTerm(inputtedTerm);
-        } else {
-            this.props.handleSpecial(event.keyCode);
         }
     },
 
@@ -56,7 +58,7 @@ var DropDown = React.createClass({
     handleClick(event) {
         console.info('DropDown.handleClick');
         var suggestion = event.target.getAttribute('data-suggestion');
-        this.props.handleTerm(suggestion);
+        this.props.handleClick(suggestion);
     },
 
     render() {
@@ -107,6 +109,15 @@ var AutoSuggest = React.createClass({
         });
     },
 
+    handleClick(term) {
+        console.info('AutoSuggest.handleClick', term);
+        this.setState({
+            index: -1,
+            term: term,
+            suggestions: suggestions,
+            displayDropDown: false
+        });
+    },
 
     handleSpecial(code) {
         console.info('AutoSuggest.handleSpecial');
@@ -117,7 +128,7 @@ var AutoSuggest = React.createClass({
 
         if (code === 13) {
             // enter
-
+            displayDropDown = false;
         } else if (code === 27) {
             // esc
             index = -1;
@@ -160,7 +171,7 @@ var AutoSuggest = React.createClass({
                     displayTerm={this.state.term}
                 />
                 <DropDown key="dropdown"
-                    handleTerm={this.handleTerm}
+                    handleClick={this.handleClick}
                     suggestions={this.state.suggestions}
                     display={this.state.displayDropDown}
                     index={this.state.index}
