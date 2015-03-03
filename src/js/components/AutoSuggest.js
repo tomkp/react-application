@@ -51,6 +51,9 @@ var SearchBox = React.createClass({
 
 var DropDown = React.createClass({
 
+    handleClick(event) {
+        console.info('DropDown.handleClick', event);
+    },
 
     render() {
         console.info('DropDown.render', this.props.suggestions);
@@ -58,8 +61,8 @@ var DropDown = React.createClass({
         var entries = this.props.suggestions
             .map((suggestion, i) => {
                 return (
-                    <div className={i === index?'selected':''}>
-                        <a href="#">{suggestion}</a>
+                    <div className={i === index?'selected':''} onClick={this.handleClick} key={suggestion}>
+                        {suggestion}
                     </div>
                 );
             });
