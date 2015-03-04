@@ -4,9 +4,14 @@ import React from 'react/addons';
 
 let Tab = React.createClass({
 
+    propTypes: {
+        id: React.PropTypes.string.isRequired,
+        name: React.PropTypes.string.isRequired,
+        active: React.PropTypes.boolean
+    },
 
-    handleClick() {
-        console.info('Tab.handleClick');
+    onClick() {
+        console.info('Tab.onClick');
         this.props.selectTab(this);
     },
 
@@ -17,8 +22,7 @@ let Tab = React.createClass({
             classes.push('active');
         }
         return (
-            <div className={classes.join(' ')}
-                onClick={this.handleClick}>
+            <div className={classes.join(' ')} onClick={this.onClick}>
                 {this.props.name}
             </div>
         )
