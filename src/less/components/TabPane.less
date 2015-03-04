@@ -7,7 +7,6 @@
     flex: 1;
     position: relative;
 
-
     .tabs {
 
     }
@@ -40,6 +39,17 @@
         text-align: center;
     }
 
+    .my-tabs {
+        padding: 1rem;
+        border-left: 4px solid @dark-gray;
+    }
+
+    @narrow: ~"screen and (max-width: 1440px)";
+    @media @narrow {
+        .Tab {
+            width: 2rem;
+        }
+    }
 }
 
 
@@ -60,18 +70,23 @@
         text-align: center;
     }
 
+    .my-tabs {
+        padding: 1rem;
+        border-top: 4px solid @dark-gray;
+    }
+
+    @narrow: ~"screen and (max-width: 1440px)";
+    @media @narrow {
+        .Tab {
+            width: 2rem;
+        }
+    }
 }
 
 
-.my-tabs {
-    background: @dark-gray;
-    color: @white;
-    padding: 1rem;
-}
 
 .Tab {
     line-height: 4rem;
-
     background: #eee;
 }
 

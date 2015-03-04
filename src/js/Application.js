@@ -12,7 +12,9 @@ let Application = React.createClass({
     render: function () {
         return (
                 <Layout type="rows">
+
                     <Fixed className="header">
+
                         <Layout type="columns">
                             <Fixed className="logo">∞</Fixed>
                             <Flex></Flex>
@@ -20,25 +22,41 @@ let Application = React.createClass({
                                 <AutoSuggest />
                             </Fixed>
                         </Layout>
+
                     </Fixed>
+
                     <Flex className="xxx">
+
                         <Layout type="columns">
+
                             <Fixed className="Sidebar">
                                 <Layout type="rows">
-                                    <Fixed>«</Fixed>
+                                    <Fixed>
+                                        <ul>
+                                            <li>Movies</li>
+                                            <li>News</li>
+                                            <li>Music</li>
+                                        </ul>
+                                    </Fixed>
                                     <Flex></Flex>
-                                    <Fixed>»</Fixed>
+                                    <Fixed>
+                                        <ul>
+                                            <li>Settings</li>
+                                            <li>Logout</li>
+                                        </ul>
+                                    </Fixed>
                                 </Layout>
                             </Fixed>
+
                             <Flex className="content">
                                 <SplitPane orientation="horizontal" minSize="200">
-                                    <div className="side1">
-                                        <TabPane orientation="vertical" className="my-tabs">
-                                            <Tab id="A" name="A">some stuff</Tab>
-                                            <Tab id="B" name="B" active="true">whatevs</Tab>
-                                            <Tab id="C" name="C">innit</Tab>
-                                        </TabPane>
-                                    </div>
+
+                                    <TabPane orientation="horizontal" className="my-tabs">
+                                        <Tab id="A" name="A">some stuff</Tab>
+                                        <Tab id="B" name="B" active="true">whatevs</Tab>
+                                        <Tab id="C" name="C">innit</Tab>
+                                    </TabPane>
+
                                     <SplitPane orientation="vertical" minSize="10">
                                         <div className="top1">
                                             Bacon ipsum dolor amet pancetta filet mignon short ribs corned beef.
@@ -47,9 +65,12 @@ let Application = React.createClass({
                                             hello
                                         </div>
                                     </SplitPane>
+
                                 </SplitPane>
                             </Flex>
+
                         </Layout>
+
                     </Flex>
                 </Layout>
         )

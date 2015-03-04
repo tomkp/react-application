@@ -3,17 +3,22 @@
 
 .Sidebar {
 
-    //width: 180px;
-    //background-image: linear-gradient(right ,#444444 0% ,#2d2d2d 100%);
+    width: 12rem;
+//    background-image: linear-gradient(right ,#444444 0% ,#2d2d2d 100%);
     background: @black;
-    width: 4rem;
+//    width: 4rem;
+    transition: width .1s;//, margin 3s;
 
+    ul,li {
+        list-style: none;
+        padding: 0;
+    }
 
     //
     .Fixed {
         padding: 1rem;
         color: #777;
-        font-size: 3rem;
+        font-size: 1rem;
 
         &:hover {
             color: @white;
@@ -22,11 +27,20 @@
 
 }
 
-//
-//.Sidebar {
-//    @narrow: ~"screen and (max-width: 1440px)";
-//    @media @narrow {
-//        width: 48px;
-//    }
-//}
+
+.Sidebar {
+    @narrow: ~"screen and (max-width: 1440px)";
+    @media @narrow {
+
+        width: 4rem;
+        transition: width .1s;//, margin 3s;
+
+        li {
+            color: red;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
 
