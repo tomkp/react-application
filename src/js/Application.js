@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from './components/Layout'; 
 import Flex from './components/Flex'; 
 import Fixed from './components/Fixed'; 
+import Calendar from './components/Calendar';
 import {TabPane, Tab} from './components/TabPane';
 import SplitPane from './components/SplitPane'; 
 import AutoSuggest from './components/AutoSuggest'; 
@@ -49,7 +50,7 @@ let Application = React.createClass({
                             </Fixed>
 
                             <Flex className="content">
-                                <SplitPane orientation="horizontal" minSize="200">
+                                <SplitPane orientation="horizontal" minSize="420">
 
                                     <TabPane orientation="horizontal" className="my-tabs">
                                         <Tab id="A" name="A">some stuff</Tab>
@@ -61,9 +62,9 @@ let Application = React.createClass({
                                         <div className="top1">
                                             Bacon ipsum dolor amet pancetta filet mignon short ribs corned beef.
                                         </div>
-                                        <div className="bottom1">
-                                            hello
-                                        </div>
+
+                                        <Calendar />
+
                                     </SplitPane>
 
                                 </SplitPane>
