@@ -11,10 +11,10 @@ let Application = React.createClass({
 
     render: function () {
         return (
-                <Layout type="Rows">
-                    <Fixed className="Header">
-                        <Layout type="Columns">
-                            <Fixed className="Logo">∞</Fixed>
+                <Layout type="rows">
+                    <Fixed className="header">
+                        <Layout type="columns">
+                            <Fixed className="logo">∞</Fixed>
                             <Flex></Flex>
                             <Fixed>
                                 <AutoSuggest />
@@ -22,15 +22,15 @@ let Application = React.createClass({
                         </Layout>
                     </Fixed>
                     <Flex className="xxx">
-                        <Layout type="Columns">
+                        <Layout type="columns">
                             <Fixed className="Sidebar">
-                                <Layout type="Rows">
-                                    <Fixed></Fixed>
+                                <Layout type="rows">
+                                    <Fixed>«</Fixed>
                                     <Flex></Flex>
-                                    <Fixed></Fixed>
+                                    <Fixed>»</Fixed>
                                 </Layout>
                             </Fixed>
-                            <Flex className="Content">
+                            <Flex className="content">
                                 <SplitPane orientation="horizontal" minSize="200">
                                     <div className="side1">
                                         <TabPane orientation="vertical" className="my-tabs">

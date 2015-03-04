@@ -31,6 +31,16 @@ let Tab = React.createClass({
 
 let TabPane = React.createClass({
 
+    propTypes: {
+        orientation: React.PropTypes.string.isRequired
+    },
+
+    getDefaultProps() {
+        return {
+            orientation: 'vertical'
+        }
+    },
+
     getInitialState() {
         console.info('TabPane.getInitialState');
         let selected = this.props.children[0];
