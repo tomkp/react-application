@@ -6,8 +6,8 @@ let Tab = React.createClass({
 
     propTypes: {
         id: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired,
-        active: React.PropTypes.boolean
+        name: React.PropTypes.string.isRequired
+        //active: React.PropTypes.boolean
     },
 
     onClick() {
