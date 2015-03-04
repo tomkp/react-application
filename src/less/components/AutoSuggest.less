@@ -3,12 +3,19 @@
 
 .AutoSuggest {
     margin: 0 1rem;
+
 }
 
 .SearchBox {
     padding: .5rem 1rem;
-    width: 200px;
+    width: 360px;
     border: 0;
+
+    @narrow: ~"screen and (max-width: 1440px)";
+    @media @narrow {
+        width: 200px;
+    }
+
 }
 
 .DropDown {
