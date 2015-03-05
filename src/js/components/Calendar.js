@@ -12,12 +12,20 @@ let Day = React.createClass({
     }
 });
 
+let DayOfWeek = React.createClass({
+    render() {
+        let classes = ['DayOfWeek'];
+        return <th className={classes.join(' ')}>{this.props.date.format('dd')}</th>
+    }
+});
+
 
 let Week = React.createClass({
     render() {
         return <tr>{this.props.children}</tr>
     }
 });
+
 
 let Calendar = React.createClass({
 
@@ -34,9 +42,10 @@ let Calendar = React.createClass({
         let classes = ['Calendar', this.props.className].join(' ');
 
         let date = this.state.date;
-        let daysInMonth = date.daysInMonth();
 
-        let current = date.clone().startOf('month').day(0);
+        const startOfWeekIndex = 0;
+
+        let current = date.clone().startOf('month').day(startOfWeekIndex);
         let end = date.clone().endOf('month').day(7);
 
         console.info('',current, end);
@@ -45,6 +54,15 @@ let Calendar = React.createClass({
         let days = [];
         let week = 1;
         let i = 1;
+
+        let daysOfWeek = [];
+        let day = current.clone();
+        for (var j = 0; j < 7; j++) {
+            daysOfWeek.push(<DayOfWeek date={day.clone()} />);
+            day.add(1, 'days');
+        }
+
+
 
         while (current.isBefore(end)) {
 
@@ -66,7 +84,7 @@ let Calendar = React.createClass({
         return (
             <table className={classes}>
                 <tr className="month"><th colspan="7">{date.format('MMMM')}</th></tr>
-                <tr className="days"><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr>
+                <Week key="daysOfWeek">{daysOfWeek}</Week>
                 {elements}
             </table>
         );
