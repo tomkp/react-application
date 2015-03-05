@@ -1,7 +1,10 @@
 {
   "name": "react-layout",
   "description": "React component layout",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomkp/react-layout"
+  },
   "devDependencies": {
     "babel-core": "^4.6.6",
     "browserify": "^9.0.3",
