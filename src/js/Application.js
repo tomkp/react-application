@@ -6,6 +6,7 @@ import Calendar from './components/Calendar';
 import {TabPane, Tab} from './components/TabPane';
 import SplitPane from './components/SplitPane'; 
 import AutoSuggest from './components/AutoSuggest'; 
+import moment from 'moment';
 
 
 let Application = React.createClass({
@@ -72,7 +73,7 @@ let Application = React.createClass({
                                             Bacon ipsum dolor amet pancetta filet mignon short ribs corned beef.
                                         </div>
 
-                                        <Calendar onSelect={this.dateSelected} />
+                                        <Calendar date={moment().add(2, 'd')} onSelect={this.dateSelected} />
 
                                     </SplitPane>
 

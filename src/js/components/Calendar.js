@@ -3,6 +3,7 @@ import moment from 'moment';
 
 
 let Day = React.createClass({
+
     render() {
         let classes = ['Day'];
         if (this.props.actual.isSame(this.props.date, 'day')) {
@@ -10,7 +11,7 @@ let Day = React.createClass({
         }
         return (
             <td className={classes.join(' ')}
-                data-date={this.props.date.format('DD/MM/YYYY')}
+                data-date={this.props.date.toISOString()}
                 onClick={this.props.handleClick}>
                 {this.props.date.format('D')}
             </td>
@@ -41,8 +42,17 @@ let Calendar = React.createClass({
 
 
     getDefaultProps() {
+        console.info('Calendar.getDefaultProps');
         return {
             date: moment()
+        }
+    },
+
+
+    getInitialState() {
+        console.info('Calendar.getInitialState');
+        return {
+            date: this.props.date
         }
     },
 
@@ -50,6 +60,9 @@ let Calendar = React.createClass({
         console.info('Calendar.handleClick', event);
         var date = event.target.getAttribute('data-date');
         this.props.onSelect(date);
+        this.setState({
+            date: moment(date)
+        });
     },
 
 
@@ -57,7 +70,7 @@ let Calendar = React.createClass({
         console.info('Calendar.render');
         let classes = ['Calendar', this.props.className].join(' ');
 
-        let date = this.props.date;
+        let date = this.state.date;
 
         const startOfWeekIndex = 0;
 
@@ -78,7 +91,12 @@ let Calendar = React.createClass({
         }
 
         while (current.isBefore(end)) {
-            days.push(<Day key={i++} actual={this.props.date} date={current.clone()} handleClick={this.handleClick} />);
+            days.push(
+                <Day key={i++}
+                    actual={this.state.date}
+                    date={current.clone()}
+                    handleClick={this.handleClick} />
+            );
             current.add(1, 'days');
             if (current.day() === 0) {
                 let weekKey = 'week' + week++;
@@ -89,7 +107,11 @@ let Calendar = React.createClass({
 
         return (
             <table className={classes}>
-                <tr className="month"><th colSpan="7">{date.format('MMMM')}</th></tr>
+                <tr>
+                    <th colSpan="7">
+                        <span className="month">{date.format('MMMM')}</span> <span className="year">{date.format('YYYY')}</span>
+                    </th>
+                </tr>
                 <Week key="daysOfWeek">{daysOfWeek}</Week>
                 {elements}
             </table>
