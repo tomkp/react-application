@@ -48,8 +48,6 @@ let Calendar = React.createClass({
         let current = date.clone().startOf('month').day(startOfWeekIndex);
         let end = date.clone().endOf('month').day(7);
 
-        console.info('',current, end);
-
         let elements = [];
         let days = [];
         let week = 1;
@@ -57,33 +55,25 @@ let Calendar = React.createClass({
 
         let daysOfWeek = [];
         let day = current.clone();
-        for (var j = 0; j < 7; j++) {
-            daysOfWeek.push(<DayOfWeek date={day.clone()} />);
+        for (let j = 0; j < 7; j++) {
+            let dayOfWeekKey = 'dayOfWeek' + j;
+            daysOfWeek.push(<DayOfWeek key={dayOfWeekKey} date={day.clone()} />);
             day.add(1, 'days');
         }
 
-
-
         while (current.isBefore(end)) {
-
-            console.info('', i, current.format('D'));
-
             days.push(<Day key={i++} actual={this.state.date} date={current.clone()} />);
-
             current.add(1, 'days');
-
             if (current.day() === 0) {
                 let weekKey = 'week' + week++;
                 elements.push(<Week key={weekKey}>{days}</Week>);
                 days = [];
             }
-
-            if (i > 50) break;
         }
 
         return (
             <table className={classes}>
-                <tr className="month"><th colspan="7">{date.format('MMMM')}</th></tr>
+                <tr className="month"><th colSpan="7">{date.format('MMMM')}</th></tr>
                 <Week key="daysOfWeek">{daysOfWeek}</Week>
                 {elements}
             </table>

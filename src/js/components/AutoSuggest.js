@@ -91,6 +91,10 @@ let DropDown = React.createClass({
 
 let AutoSuggest = React.createClass({
 
+    propTypes: {
+        onSuggestion: React.PropTypes.func.isRequired
+    },
+
     getInitialState() {
         return {
             suggestions: [],
@@ -98,6 +102,7 @@ let AutoSuggest = React.createClass({
             index: -1
         }
     },
+
 
     handleTerm(term) {
         console.info('AutoSuggest.handleTerm', term);
@@ -109,6 +114,7 @@ let AutoSuggest = React.createClass({
         });
     },
 
+
     handleClick(term) {
         console.info('AutoSuggest.handleClick', term);
         this.setState({
@@ -117,7 +123,14 @@ let AutoSuggest = React.createClass({
             suggestions: suggestions,
             displayDropDown: false
         });
+        this.triggerSuggestion(term);
     },
+
+
+    triggerSuggestion: function (suggestion) {
+        this.props.onSuggestion(suggestion);
+    },
+
 
     handleSpecial(code) {
         console.info('AutoSuggest.handleSpecial');
@@ -129,6 +142,7 @@ let AutoSuggest = React.createClass({
         if (code === 13) {
             // enter
             displayDropDown = false;
+            this.triggerSuggestion(this.state.term);
         } else if (code === 27) {
             // esc
             index = -1;

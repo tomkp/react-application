@@ -10,6 +10,11 @@ import AutoSuggest from './components/AutoSuggest';
 
 let Application = React.createClass({
 
+
+    autoSuggested(suggestion) {
+        console.info('Application.autoSuggested', suggestion);
+    },
+
     render: function () {
         return (
                 <Layout type="rows">
@@ -20,7 +25,7 @@ let Application = React.createClass({
                             <Fixed className="logo">∞</Fixed>
                             <Flex></Flex>
                             <Fixed>
-                                <AutoSuggest />
+                                <AutoSuggest onSuggestion={this.autoSuggested} />
                             </Fixed>
                         </Layout>
 
