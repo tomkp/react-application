@@ -8,7 +8,13 @@ let Day = React.createClass({
         if (this.props.actual.isSame(this.props.date, 'day')) {
             classes.push('actual');
         }
-        return <td className={classes.join(' ')}>{this.props.date.format('D')}</td>
+        return (
+            <td className={classes.join(' ')}
+                data-date={this.props.date.format('DD/MM/YYYY')}
+                onClick={this.props.handleClick}>
+                {this.props.date.format('D')}
+            </td>
+        );
     }
 });
 
@@ -29,11 +35,21 @@ let Week = React.createClass({
 
 let Calendar = React.createClass({
 
+    propTypes: {
+        onSelect: React.PropTypes.func.isRequired
+    },
 
-    getInitialState() {
+
+    getDefaultProps() {
         return {
             date: moment()
         }
+    },
+
+    handleClick(event) {
+        console.info('Calendar.handleClick', event);
+        var date = event.target.getAttribute('data-date');
+        this.props.onSelect(date);
     },
 
 
@@ -41,7 +57,7 @@ let Calendar = React.createClass({
         console.info('Calendar.render');
         let classes = ['Calendar', this.props.className].join(' ');
 
-        let date = this.state.date;
+        let date = this.props.date;
 
         const startOfWeekIndex = 0;
 
@@ -62,7 +78,7 @@ let Calendar = React.createClass({
         }
 
         while (current.isBefore(end)) {
-            days.push(<Day key={i++} actual={this.state.date} date={current.clone()} />);
+            days.push(<Day key={i++} actual={this.props.date} date={current.clone()} handleClick={this.handleClick} />);
             current.add(1, 'days');
             if (current.day() === 0) {
                 let weekKey = 'week' + week++;

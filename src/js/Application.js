@@ -15,6 +15,10 @@ let Application = React.createClass({
         console.info('Application.autoSuggested', suggestion);
     },
 
+    dateSelected(date) {
+        console.info('Application.dateSelected', date);
+    },
+
     render: function () {
         return (
                 <Layout type="rows">
@@ -68,7 +72,7 @@ let Application = React.createClass({
                                             Bacon ipsum dolor amet pancetta filet mignon short ribs corned beef.
                                         </div>
 
-                                        <Calendar />
+                                        <Calendar onSelect={this.dateSelected} />
 
                                     </SplitPane>
 

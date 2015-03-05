@@ -13,6 +13,10 @@ describe('Calendar', function() {
             <Calendar />
         );
 
+        var month = TestUtils.findRenderedDOMComponentWithClass(calendar, 'month');
+        expect(month.getDOMNode().textContent).toEqual('March');
+
+
     });
 
 
