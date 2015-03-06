@@ -9,12 +9,6 @@ let suggestions = [
 let SearchBox = React.createClass({
 
 
-    getInitialState() {
-        return {
-            value: ''
-        }
-    },
-
     componentDidMount() {
         this.refs.searchBox.getDOMNode().focus();
     },
@@ -31,9 +25,6 @@ let SearchBox = React.createClass({
 
     handleChange(event) {
         console.info('SearchBox.handleChange', event, event.keyCode);
-        this.setState({
-            value: event.target.value
-        });
         let keys = [13,27,38,39,40];
         if (keys.indexOf(event.keyCode) === -1) {
             let inputtedTerm = this.refs.searchBox.getDOMNode().value;
