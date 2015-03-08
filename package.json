@@ -1,9 +1,9 @@
 {
-  "name": "react-layout",
-  "description": "React component layout",
+  "name": "react-application",
+  "description": "React component application",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomkp/react-layout"
+    "url": "https://github.com/tomkp/react-application"
   },
   "devDependencies": {
     "babel-core": "^4.6.6",
