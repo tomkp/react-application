@@ -26,18 +26,7 @@ let Layout = React.createClass({
         if (this.props.type === 'rows') {
             styles = {
                 display: 'flex',
-                // todo: https://github.com/facebook/react/issues/2020
-                // display: '-webkit-flex',
-
-                WebkitBoxFlex: 1,
-                WebkitFlex: 1,
-                msFlex: 1,
                 flex: 1,
-
-                WebkitBoxOrient: 'vertical',
-                WebkitBoxDirection: 'normal',
-                WebkitFlexDirection: 'column',
-                msFlexDirection: 'column',
                 flexDirection: 'column',
 
                 position: 'relative',
@@ -47,16 +36,7 @@ let Layout = React.createClass({
         } else {
             styles = {
                 display: 'flex',
-
-                WebkitBoxFlex: 1,
-                WebkitFlex: 1,
-                msFlex: 1,
                 flex: 1,
-
-                WebkitBoxOrient: 'horizontal',
-                WebkitBoxDirection: 'normal',
-                WebkitFlexDirection: 'row',
-                msFlexDirection: 'row',
                 flexDirection: 'row',
 
                 height: '100%',

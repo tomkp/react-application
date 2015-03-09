@@ -18,16 +18,11 @@ let flexboxKeys = [
     'transform'
 ];
 
-function Prefix (styles, userAgent) {
+function prefix (styles, userAgent) {
    
-
     let result = {};
 
-    Object.keys(styles).forEach(
-            key => {
-                console.info('key', key);
-            // Browser sniffing sucks, but Safari overloads display, and there's
-            // no way to set a style key to two values in React
+    Object.keys(styles).forEach(key => {
             if (
                 key === 'display'
                 && styles['display'].indexOf('flex') !== -1
@@ -35,20 +30,21 @@ function Prefix (styles, userAgent) {
                 && userAgent.indexOf('WebKit') !== -1
                 && userAgent.indexOf('Chrom') === -1
             ) {
-                result['display'] = `-webkit-${ styles['display'] }`;
+                result['display'] = `-webkit-${ styles['display'] }`;;
 
             } else if (flexboxKeys.indexOf(key) !== -1) {
                 var titleCasedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
                 result[`Webkit${ titleCasedKey }`] = styles[key];
-
             } else {
                 result[key] = styles[key];
             }
         }
     );
 
+    console.info('converted styles', result);
+
     return result;
 }
 
 
-export default Prefix;
+export default prefix;
