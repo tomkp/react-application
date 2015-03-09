@@ -3,8 +3,9 @@ import Layout from './components/Layout';
 import Flex from './components/Flex'; 
 import Fixed from './components/Fixed'; 
 import Calendar from './components/Calendar';
-import {TabPane, Tab} from './components/TabPane';
-import SplitPane from './components/SplitPane'; 
+import TabPane from './components/TabPane';
+import Tab from './components/Tab';
+import SplitPane from './components/SplitPane';
 import AutoSuggest from './components/AutoSuggest'; 
 import moment from 'moment';
 

@@ -1,44 +1,6 @@
 import React from 'react';
-
-
-let Resizer = React.createClass({
-
-    handleDown() {
-        this.props.down();
-    },
-
-    render() {
-        return <span className="Resizer" onMouseDown={this.handleDown} />
-    }
-});
-
-
-let Pane = React.createClass({
-
-    getInitialState() {
-        return {
-        }
-    },
-
-    render() {
-        let classes = ['Pane'];
-        let styles = {};
-        if (this.state.size) {
-            if (this.props.orientation === 'horizontal') {
-                styles = {
-                    width: this.state.size
-                }
-            } else {
-                styles = {
-                    height: this.state.size
-                }
-            }
-            classes.push('noflex');
-        }
-        classes = classes.join(' ');
-        return <div className={classes} style={styles}>{this.props.children}</div>;
-    }
-});
+import Pane from './Pane';
+import Resizer from './Resizer';
 
 
 let SplitPane = React.createClass({
@@ -109,9 +71,9 @@ let SplitPane = React.createClass({
         elements.push(<Resizer ref="resizer" key="resizer" down={this.down} />);
         elements.push(<Pane ref="pane2" key="pane2">{child1}</Pane>);
 
-        let classes = ['SplitPane', this.props.orientation].join(' ');
+        let classes = ['SplitPane', this.props.orientation];
 
-        return <div className={classes} ref="splitPane">{elements}</div>
+        return <div className={classes.join(' ')} ref="splitPane">{elements}</div>
     }
 });
 
