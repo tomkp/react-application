@@ -65,14 +65,14 @@ let SplitPane = React.createClass({
 
     render() {
         
-        let definition = prefix({
+        let definition = {
             display: 'flex',
             flex: 1,
             position: 'relative',
             outline: 'none',
             overflow: 'hidden',
             userSelect: 'none'
-        });
+        };
         
         let elements = [];
         let children = this.props.children;
@@ -84,7 +84,7 @@ let SplitPane = React.createClass({
 
         let classes = ['SplitPane', this.props.orientation];
 
-        return <div className={classes.join(' ')} style={definition} ref="splitPane">{elements}</div>
+        return <div className={classes.join(' ')} style={prefix(definition)} ref="splitPane">{elements}</div>
     }
 });
 

@@ -19,8 +19,10 @@ let flexboxKeys = [
     'userSelect'
 ];
 
-function prefix (styles, userAgent) {
-   
+function prefix (styles) {
+
+
+    let userAgent = window.navigator.userAgent;
     let result = {};
 
     Object.keys(styles).forEach(key => {
@@ -41,8 +43,6 @@ function prefix (styles, userAgent) {
             }
         }
     );
-
-    console.info('converted styles', result);
 
     return result;
 }

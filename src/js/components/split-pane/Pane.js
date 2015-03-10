@@ -1,4 +1,5 @@
 import React from 'react';
+import prefix from '../prefix/Prefix';
 
 
 let Pane = React.createClass({
@@ -10,7 +11,10 @@ let Pane = React.createClass({
 
     render() {
         let classes = ['Pane'];
-        let styles = {};
+        let styles = {
+            flex: 1,
+            outline: 'none'
+        };
         if (this.state.size) {
             if (this.props.orientation === 'horizontal') {
                 styles = {
@@ -21,10 +25,10 @@ let Pane = React.createClass({
                     height: this.state.size
                 }
             }
-            classes.push('noflex');
+            styles['flex'] = 'none';
         }
         classes = classes.join(' ');
-        return <div className={classes} style={styles}>{this.props.children}</div>;
+        return <div className={classes} style={prefix(styles)}>{this.props.children}</div>;
     }
 });
 

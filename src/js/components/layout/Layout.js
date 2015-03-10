@@ -46,8 +46,6 @@ let Layout = React.createClass({
             };
         }
 
-        styles = prefix(styles, window.navigator.userAgent);
-
         let type = this.props.type;
         let index = 0;
         let elements = this.props.children.map((child) => {
@@ -57,7 +55,7 @@ let Layout = React.createClass({
             });
         });
 
-        return <div className={classes.join(' ')} style={styles}>{elements}</div>;
+        return <div className={classes.join(' ')} style={prefix(styles)}>{elements}</div>;
     }
 });
 
