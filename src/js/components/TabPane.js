@@ -42,11 +42,28 @@ let TabPane = React.createClass({
         console.info('TabPane.render');
 
         let classes = ['TabPane', this.props.orientation].join(' ');
-        let styles = prefix({
-            display: 'flex',
-            flex: 1,
-            position: 'relative'
-        });
+        let styles;
+        if (this.props.orientation === 'vertical') {
+            styles = prefix({
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'row',
+                height: '100%',
+                position: 'absolute',
+                left: 0,
+                right: 0
+            });
+        } else {
+            styles = prefix({
+                display: 'flex',
+                flex: 1,
+                position: 'relative',
+                flexDirection: 'column',
+                height: '100%',
+                minHeight: '100%'
+            });
+        }
+
 
         let paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
         let paneStyles = prefix({
