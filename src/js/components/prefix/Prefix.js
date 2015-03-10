@@ -15,7 +15,8 @@ let flexboxKeys = [
     'flexWrap',
     'justifyContent',
     'order',
-    'transform'
+    'transform',
+    'userSelect'
 ];
 
 function prefix (styles, userAgent) {
@@ -30,7 +31,7 @@ function prefix (styles, userAgent) {
                 && userAgent.indexOf('WebKit') !== -1
                 && userAgent.indexOf('Chrom') === -1
             ) {
-                result['display'] = `-webkit-${ styles['display'] }`;;
+                result['display'] = `-webkit-${ styles['display'] }`;
 
             } else if (flexboxKeys.indexOf(key) !== -1) {
                 var titleCasedKey = key.substring(0, 1).toUpperCase() + key.substring(1);
