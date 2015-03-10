@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from './components/Layout'; 
-import Flex from './components/Flex'; 
-import Fixed from './components/Fixed'; 
-import Calendar from './components/Calendar';
-import TabPane from './components/TabPane';
-import Tab from './components/Tab';
-import SplitPane from './components/SplitPane';
-import AutoSuggest from './components/AutoSuggest'; 
+import Layout from './components/layout/Layout';
+import Flex from './components/layout/Flex';
+import Fixed from './components/layout/Fixed';
+import Calendar from './components/calendar/Calendar';
+import TabPane from './components/tab-pane/TabPane';
+import Tab from './components/tab-pane/Tab';
+import SplitPane from './components/split-pane/SplitPane';
+import AutoSuggest from './components/auto-suggest/AutoSuggest';
 import moment from 'moment';
 
 

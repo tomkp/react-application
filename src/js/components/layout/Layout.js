@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import prefix from './Prefix';
+import prefix from '../prefix/Prefix';
 
 
 let Layout = React.createClass({
