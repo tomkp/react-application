@@ -94,7 +94,11 @@ let SplitPane = React.createClass({
             this.merge(definition, {
                 flexDirection: 'column',
                 height: '100%',
-                minHeight: '100%'
+                minHeight: '100%',
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                width: '100%'
             });
         } else {
             this.merge(definition, {
@@ -112,9 +116,9 @@ let SplitPane = React.createClass({
         let child1 = children[1];
         elements.push(<Pane ref="pane1" key="pane1" orientation={orientation}>{child0}</Pane>);
         elements.push(<Resizer ref="resizer" key="resizer" down={this.down} />);
-        elements.push(<Pane ref="pane2" key="pane2">{child1}</Pane>);
+        elements.push(<Pane ref="pane2" key="pane2" orientation={orientation}>{child1}</Pane>);
 
-        let classes = ['SplitPane', this.props.orientation];
+        let classes = ['SplitPane', orientation];
 
         return <div className={classes.join(' ')} style={prefix(definition)} ref="splitPane">{elements}</div>
     }

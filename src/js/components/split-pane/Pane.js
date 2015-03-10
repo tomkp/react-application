@@ -10,26 +10,26 @@ let Pane = React.createClass({
     },
 
     render() {
-        let classes = ['Pane'];
+        let orientation = this.props.orientation;
+        let classes = ['Pane', orientation];
+
         let styles = {
             flex: 1,
             outline: 'none',
             overflow: 'auto'
         };
         if (this.state.size) {
-            if (this.props.orientation === 'horizontal') {
-                styles = {
-                    width: this.state.size
-                }
+            if (orientation === 'vertical') {
+                styles['height'] = this.state.size;
+                styles['display'] = 'flex';
             } else {
-                styles = {
-                    height: this.state.size
-                }
+                styles['width'] = this.state.size;
+                //styles['height'] = '100%';
+                //styles['display'] = 'flex';
             }
             styles['flex'] = 'none';
         }
-        classes = classes.join(' ');
-        return <div className={classes} style={prefix(styles)}>{this.props.children}</div>;
+        return <div className={classes.join(' ')} style={prefix(styles)}>{this.props.children}</div>;
     }
 });
 
