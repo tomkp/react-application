@@ -31,8 +31,25 @@ let Calendar = React.createClass({
         });
     },
 
+    previous() {
+        this.setState({
+            date: moment(this.state.date).subtract(1, 'month')
+        });
+    },
+
+    next() {
+        this.setState({
+            date: moment(this.state.date).add(1, 'month')
+        });
+    },
+
     render() {
         let classes = ['Calendar', this.props.className].join(' ');
+
+        let actionStyle = {
+            cursor: 'pointer'
+        };
+
         let date = this.state.date;
         const startOfWeekIndex = 0;
         let current = date.clone().startOf('month').day(startOfWeekIndex);
@@ -64,13 +81,21 @@ let Calendar = React.createClass({
         }
         return (
             <table className={classes}>
-                <tr>
-                    <th colSpan="7">
-                        <span className="month">{date.format('MMMM')}</span> <span className="year">{date.format('YYYY')}</span>
-                    </th>
-                </tr>
-                <Week key="daysOfWeek">{daysOfWeek}</Week>
-                {elements}
+                <thead>
+                    <tr>
+                        <th className="previous" onClick={this.previous} style={actionStyle}>«</th>
+                        <th colSpan="5">
+                            <span className="month">{date.format('MMMM')}</span> <span className="year">{date.format('YYYY')}</span>
+                        </th>
+                        <th className="next" onClick={this.next} style={actionStyle}>»</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <Week key="daysOfWeek">{daysOfWeek}</Week>
+                </thead>
+                <tbody>
+                    {elements}
+                </tbody>
             </table>
         );
     }
