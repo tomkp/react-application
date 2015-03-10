@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import Tab from './Tab';
-
+import prefix from './Prefix';
 
 
 let TabPane = React.createClass({
@@ -40,8 +40,20 @@ let TabPane = React.createClass({
 
     render() {
         console.info('TabPane.render');
+
         let classes = ['TabPane', this.props.orientation].join(' ');
+        let styles = prefix({
+            display: 'flex',
+            flex: 1,
+            position: 'relative'
+        });
+
         let paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
+        let paneStyles = prefix({
+            flex: 1
+        });
+
+
         let selectedId = this.state.selectedTab.props.id;
         let elements = this.props.children.map((child) => {
             let active = child.props.id === selectedId;
@@ -54,11 +66,11 @@ let TabPane = React.createClass({
         });
 
         return (
-            <div className={classes} ref="TabPane">
+            <div className={classes} styles={styles} ref="TabPane">
                 <div className="tabs">
                     {elements}
                 </div>
-                <div className={paneClasses}>
+                <div className={paneClasses} styles={paneStyles}>
                     {this.state.selectedTab.props.children}
                 </div>
             </div>
