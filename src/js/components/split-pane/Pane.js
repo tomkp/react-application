@@ -13,7 +13,8 @@ let Pane = React.createClass({
         let classes = ['Pane'];
         let styles = {
             flex: 1,
-            outline: 'none'
+            outline: 'none',
+            overflow: 'auto'
         };
         if (this.state.size) {
             if (this.props.orientation === 'horizontal') {

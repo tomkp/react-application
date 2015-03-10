@@ -8,6 +8,7 @@
   "devDependencies": {
     "babel-core": "^4.6.6",
     "browserify": "^9.0.3",
+    "core-js": "^0.7.2",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-babel": "^4.0.0",
