@@ -1,6 +1,7 @@
 import React from 'react';
 import Pane from './Pane';
 import Resizer from './Resizer';
+import prefix from '../prefix/Prefix';
 
 
 let SplitPane = React.createClass({
@@ -63,6 +64,16 @@ let SplitPane = React.createClass({
     },
 
     render() {
+        
+        let definition = prefix({
+            display: 'flex',
+            flex: 1,
+            position: 'relative',
+            outline: 'none',
+            overflow: 'hidden',
+            userSelect: 'none'
+        });
+        
         let elements = [];
         let children = this.props.children;
         let child0 = children[0];
@@ -73,7 +84,7 @@ let SplitPane = React.createClass({
 
         let classes = ['SplitPane', this.props.orientation];
 
-        return <div className={classes.join(' ')} ref="splitPane">{elements}</div>
+        return <div className={classes.join(' ')} style={definition} ref="splitPane">{elements}</div>
     }
 });
 
