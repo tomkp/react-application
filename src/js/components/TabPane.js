@@ -64,6 +64,21 @@ let TabPane = React.createClass({
             });
         }
 
+        let tabsClasses = 'Tabs';
+        let tabsStyles;
+        if (this.props.orientation === 'vertical') {
+            tabsStyles = prefix({
+                //flex: 1,
+                height: '100%'
+            });
+        } else {
+            tabsStyles = prefix({
+                flex: 1,
+                width: '100%',
+                whiteSpace: 'nowrap'
+            });
+        }
+
 
         let paneClasses = ['TabPaneDisplay', this.props.className].join(' ');
         let paneStyles = prefix({
@@ -83,11 +98,11 @@ let TabPane = React.createClass({
         });
 
         return (
-            <div className={classes} styles={styles} ref="TabPane">
-                <div className="tabs">
+            <div className={classes} style={styles} ref="TabPane">
+                <div className="Tabs" style={tabsStyles}>
                     {elements}
                 </div>
-                <div className={paneClasses} styles={paneStyles}>
+                <div className={paneClasses} style={paneStyles}>
                     {this.state.selectedTab.props.children}
                 </div>
             </div>
