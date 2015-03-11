@@ -67,11 +67,10 @@ let Calendar = React.createClass({
         }
         while (current.isBefore(end)) {
             let isCurrentMonth = current.isSame(date, 'month');
-            console.info('isCurrentMonth', isCurrentMonth);
             days.push(
                 <Day key={i++}
                     actual={date}
-                    thisMonth={isCurrentMonth}
+                    isCurrentMonth={isCurrentMonth}
                     date={current.clone()}
                     handleClick={this.handleClick} />
             );

@@ -17,7 +17,7 @@ let Day = React.createClass({
         let style = {
             cursor: 'pointer'
         };
-        if (!this.props.thisMonth) {
+        if (!this.props.isCurrentMonth) {
             classes.push('other-month');
         }
         return (
