@@ -27,4 +27,11 @@ describe('Calendar', function() {
     });
 
 
+    it('should be able to go to previous month', function() {
+        var previous = TU.findRenderedDOMComponentWithClass(calendar, 'previous');
+        TU.Simulate.click(previous);
+        var month = TU.findRenderedDOMComponentWithClass(calendar, 'month');
+        expect(month.getDOMNode().textContent).toEqual('March');
+    });
+
 });
