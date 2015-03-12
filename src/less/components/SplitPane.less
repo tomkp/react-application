@@ -1,144 +1,43 @@
 @import "../general/colors";
 
-.SplitPane {
-//    display: flex;
-//    flex: 1;
-//    position: relative;
-//    outline: none;
-//    overflow: hidden;
-//    user-select: none;
-}
-
-.SplitPane > .Pane {
-//    flex: 1;
-//    outline:none;
-}
-
-.SplitPane > .Pane.noflex {
-//    flex: none;
-//    outline:none;
-}
-
-.SplitPane > .Pane {
-    //overflow: auto;
-}
-
-.SplitPane > .Pane > * {
-
-}
-
-.SplitPane.vertical {
-//    flex-direction: column;
-//    height: 100%;
-//    min-height: 100%;
-}
-
-.SplitPane.horizontal {
-//    flex-direction: row;
-//    height: 100%;
-//    position: absolute;
-//    left: 0;
-//    right: 0;
-}
-
-.SplitPane.vertical > .Pane {
-    //display: flex;
-}
-
-/*
-.SplitPane.vertical > .Pane > * {
-    flex: 1;
-}
-
-.SplitPane.horizontal > .Pane {
-    height: 100%;
-    display: flex;
-}
-
-.SplitPane.horizontal > .Pane > * {
-    //overflow: scroll;
-    height: 100%;
-    flex: 1;
-}*/
-
-
-.SplitPane .Resizer {
+.Resizer {
     background: #000;
     opacity: .2;
     z-index: 1;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
 }
 
-.SplitPane .Resizer:hover {
+.Resizer:hover {
+    -webkit-transition: all 2s ease;
     transition: all 2s ease;
 }
 
-.SplitPane.vertical > .Resizer {
+.Resizer.vertical {
     height: 11px;
     margin: -5px 0;
-    border-top: 5px solid rgba(255,255,255,0);
-    border-bottom: 5px solid rgba(255,255,255,0);
-    background-clip: padding-box;
+    border-top: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 5px solid rgba(255, 255, 255, 0);
     cursor: row-resize;
     width: 100%;
 }
 
-.SplitPane.vertical > .Resizer:hover {
-    border-top: 5px solid rgba(0,0,0,0.5);
-    border-bottom: 5px solid rgba(0,0,0,0.5);
+.Resizer.vertical:hover {
+    border-top: 5px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
 }
 
-.SplitPane.horizontal > .Resizer {
+.Resizer.horizontal {
     width: 11px;
     margin: 0 -5px;
-    border-left: 5px solid rgba(255,255,255,0);
-    border-right: 5px solid rgba(255,255,255,0);
-    background-clip: padding-box;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
     cursor: col-resize;
     height: 100%;
 }
 
-.SplitPane.horizontal > .Resizer:hover {
-    border-left: 5px solid rgba(0,0,0,0.5);
-    border-right: 5px solid rgba(0,0,0,0.5);
+.Resizer.horizontal:hover {
+    border-left: 5px solid rgba(0, 0, 0, 0.5);
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
 }
-
-
-
-/*
-
-.side1 {
-    background-size: cover;
-    background-image: url("https://farm5.staticflickr.com/4126/4967496973_2a46d4ecc9_b.jpg");
-}
-.side2 {
-    background-size: cover;
-    background-image: url("https://farm3.staticflickr.com/2895/14690556513_e4255a283b_b.jpg");
-}
-.top1 {
-    background-size: cover;
-    background-image: url("https://farm4.staticflickr.com/3434/3728305015_0719ef3e51_b.jpg");
-}
-.top2 {
-    background-size: cover;
-    background-image: url("https://farm3.staticflickr.com/2443/3773798879_b1f5eeac35_b.jpg");
-}
-.top3 {
-    background-size: cover;
-    background-image: url("https://farm4.staticflickr.com/3580/3356573625_2b6e4968d7_b.jpg");
-}
-.bottom1 {
-    background-size: cover;
-    background-image: url("https://farm4.staticflickr.com/3458/3366470978_a9486f5c2e_b.jpg");
-}
-.bottom2 {
-    background-size: cover;
-    background-image: url("https://farm3.staticflickr.com/2602/3727849404_fc18f29fc4_b.jpg");
-}
-.bottom3 {
-    background-size: cover;
-    background-image: url("https://farm4.staticflickr.com/3545/3773817673_849d0a11b4_b.jpg");
-}
-.bottom4 {
-    background-size: cover;
-    background-image: url("https://farm3.staticflickr.com/2620/3730887608_beac202e60_b.jpg");
-}*/
