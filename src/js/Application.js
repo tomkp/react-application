@@ -12,6 +12,9 @@ import moment from 'moment';
 
 let Application = React.createClass({
 
+    suggestions() {
+        return ['chicken', 'duck', 'elephant', 'zebra', 'penguin', 'dog', 'cat', 'crocodile'];
+    },
 
     autoSuggested(suggestion) {
         console.info('Application.autoSuggested', suggestion);
@@ -31,7 +34,7 @@ let Application = React.createClass({
                             <Fixed className="logo">∞</Fixed>
                             <Flex></Flex>
                             <Fixed>
-                                <AutoSuggest onSuggestion={this.autoSuggested} />
+                                <AutoSuggest suggestions={this.suggestions} onSuggestion={this.autoSuggested} />
                             </Fixed>
                         </Layout>
 

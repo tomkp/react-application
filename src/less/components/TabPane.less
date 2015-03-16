@@ -2,43 +2,13 @@
 @import "../general/misc";
 
 
-/*.TabPane {
-
-    display: flex;
-    flex: 1;
-    position: relative;
-
-    .tabs {
-
-    }
-
-    .Tab {
-        cursor: pointer;
-    }
-
-    .TabPaneDisplay {
-        flex: 1;
-    }
-}*/
-
 .TabPane.vertical {
-
-//    flex-direction: row;
-//    height: 100%;
-//    position: absolute;
-//    left: 0;
-//    right: 0;
-
-    .Tabs {
-//        height: 100%;
-    }
 
     .Tabs {
         width: 4rem;
     }
 
     .Tab {
-        display: block;
         border-bottom: 1px solid #fff;
         text-align: center;
     }
@@ -57,18 +27,8 @@
 
 
 .TabPane.horizontal {
-//
-//    flex-direction: column;
-//    height: 100%;
-//    min-height: 100%;
-
-    .Tabs {
-//        width: 100%;
-//        white-space: nowrap;
-    }
 
     .Tab {
-        display: inline-block;
         border-right: 1px solid #fff;
         width: 8rem;
         text-align: center;
@@ -78,7 +38,6 @@
         padding: 1rem;
         border-top: 4px solid @dark-gray;
     }
-
 
     @media @narrow {
         .Tab {
