@@ -20,7 +20,7 @@ Run tests
 npm test
 ```
 
-Build apllication
+Build application
 ```
 gulp
 ```
